@@ -3,7 +3,6 @@ package api
 import (
 	"context"
 	"fmt"
-	"io"
 	"io/ioutil"
 	"os"
 
@@ -12,11 +11,11 @@ import (
 )
 
 // visionClassificationPredict does a prediction for image classification.
-func visionClassificationPredict(w io.Writer, projectID string, location string, modelID string, filePath string) error {
-	// projectID := "my-project-id"
-	// location := "us-central1"
-	// modelID := "ICN123456789..."
-	// filePath := "path/to/image.jpg"
+func VisionClassificationPredict() error {
+	projectID := "ecommercechatbotdev-wcscos"
+	location := "us-central1"
+	modelID := "ICN7880492306363580416"
+	filePath := "./test1.jpg"
 
 	ctx := context.Background()
 	client, err := automl.NewPredictionClient(ctx)
@@ -59,8 +58,8 @@ func visionClassificationPredict(w io.Writer, projectID string, location string,
 	}
 
 	for _, payload := range resp.GetPayload() {
-		fmt.Fprintf(w, "Predicted class name: %v\n", payload.GetDisplayName())
-		fmt.Fprintf(w, "Predicted class score: %v\n", payload.GetClassification().GetScore())
+		fmt.Printf("Predicted class name: %v\n", payload.GetDisplayName())
+		fmt.Printf("Predicted class score: %v\n", payload.GetClassification().GetScore())
 	}
 
 	return nil

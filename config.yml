@@ -5,8 +5,8 @@ server:
   port: 8080
 
 gcloud:
-  projectID: ""
-  location: ""
-  modelID: ""
+  projectID: "ecommercechatbotdev-wcscos"
+  location: "us-central1"
+  modelID: "ICN7880492306363580416"
   filePath: ""
 
