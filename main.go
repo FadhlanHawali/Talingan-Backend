@@ -2,23 +2,31 @@ package main
 
 import (
 	"context"
+	"fmt"
+	config "github.com/Talingan-Backend/configs"
 	"github.com/Talingan-Backend/database"
+	"github.com/Talingan-Backend/pkg/file"
+	"github.com/Talingan-Backend/utils"
+	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 	"github.com/spf13/viper"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 	"log"
 	"net/http"
-
-	"github.com/Talingan-Backend/utils"
-	"github.com/gorilla/mux"
-	"github.com/rs/cors"
 )
-
+const maxUploadSize = 2 * 1024 * 1024 // 2 mb
+const uploadPath = "./tmp"
 func main() {
+	var configuration config.Configuration
 
 	viper.SetConfigFile("./configs/config.yml")
 	if err := viper.ReadInConfig(); err != nil {
 		log.Fatalf("Error reading config file, %s", err)
+	}
+	err := viper.Unmarshal(&configuration)
+	if err != nil {
+		log.Fatalf("unable to decode into struct, %v", err)
 	}
 
 	// if err := api.VisionClassificationPredict(); err != nil {
@@ -26,26 +34,30 @@ func main() {
 	// 	return
 	// }
 
-	db := database.DBInit("mongodb://127.0.0.1:27017")
+	db := database.DBInit(configuration.Database.ConnectionURI)
 	inDB := &InDB{DB: db}
 	router := mux.NewRouter()
 	router.HandleFunc("/", http.HandlerFunc(inDB.checkHealth))
+	router.HandleFunc("/file", http.HandlerFunc(file.UploadFileHandler))
 	handler := cors.AllowAll().Handler(router)
 	// port := fmt.Sprintf(":%s", viper.Get("host.port"))
-	log.Printf("Server Running on port %s", "8080")
-	log.Fatal(http.ListenAndServe(":8080", handler))
+	port:=configuration.Server.Port
+	log.Printf("Server Running on port %d", port)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d",port), handler))
 }
 
 func (idb *InDB) checkHealth(w http.ResponseWriter, r *http.Request) {
-	utils.WrapAPISuccess(w, r, "Success", 200)
+
 	err := idb.DB.Ping(context.Background(), readpref.Primary())
 	if err != nil{
 		log.Fatal(err)
 	}else{
 		log.Println("Connected !")
+		utils.WrapAPISuccess(w, r, "Success", 200)
 	}
 	return
 }
+
 
 type InDB struct{
 	DB *mongo.Client

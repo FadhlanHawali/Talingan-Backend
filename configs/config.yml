@@ -1,12 +1,17 @@
 database:
-  connectionUri: ""
+  connectionUri: "MONGODB_API_URI"
 
 server:
-  port: 8080
+  port: PORT
+
+staticfile:
+  dir: "DIR_FILE"
+  maxUploadSize: MAX_FILE_SIZE(KB)
 
 gcloud:
-  projectID: "ecommercechatbotdev-wcscos"
-  location: "us-central1"
-  modelID: "ICN7880492306363580416"
-  filePath: ""
+  projectID: "GCLOUD_PROJECT_ID"
+  location: "GCLOUD_SERVER_LOCATION"
+  modelID: "GCLOUD_AUTOML_MODEL_ID"
+
+
 
