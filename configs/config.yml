@@ -1,17 +1,16 @@
 database:
-  connectionUri: "MONGODB_API_URI"
+  connectionUri: "mongodb://127.0.0.1:27017"
 
 server:
-  port: PORT
+  port: 8080
 
 staticfile:
-  dir: "DIR_FILE"
-  maxUploadSize: MAX_FILE_SIZE(KB)
+  dir: "/mnt"
+  maxUploadSize: 4096
 
 gcloud:
-  projectID: "GCLOUD_PROJECT_ID"
-  location: "GCLOUD_SERVER_LOCATION"
-  modelID: "GCLOUD_AUTOML_MODEL_ID"
-
-
+  projectID: "ecommercechatbotdev-wcscos"
+  location: "us-central1"
+  modelID: "ICN7880492306363580416"
+  filePath: ""
 
