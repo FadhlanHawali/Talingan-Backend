@@ -1,5 +1,5 @@
 database:
-  connectionUri: "asdasdmongodb://127.0.0.1:27017"
+  connectionUri: "asmongodb://127.0.0.1:27017"
 
 server:
   port: 8080
