@@ -1,5 +1,5 @@
 database:
-  connectionUri: "resasmongodb://127.0.0.1:27017"
+  connectionUri: "mongodb://127.0.0.1:27017"
 
 server:
   port: 8080
