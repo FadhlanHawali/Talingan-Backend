@@ -44,7 +44,9 @@ func main() {
 	// port := fmt.Sprintf(":%s", viper.Get("host.port"))
 	port:=configuration.Server.Port
 	log.Printf("Server Running on port %d", port)
+	log.Println("check")
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d",port), handler))
+
 }
 
 func checkGithub(w http.ResponseWriter, r *http.Request){
