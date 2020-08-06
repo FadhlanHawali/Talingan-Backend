@@ -44,7 +44,7 @@ func main() {
 	// port := fmt.Sprintf(":%s", viper.Get("host.port"))
 	port:=configuration.Server.Port
 	log.Printf("Server Running on port %d", port)
-	log.Println("checks1")
+	log.Println("checks122")
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d",port), handler))
 
 }
