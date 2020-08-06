@@ -39,11 +39,17 @@ func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/", http.HandlerFunc(inDB.checkHealth))
 	router.HandleFunc("/file", http.HandlerFunc(file.UploadFileHandler))
+	router.HandleFunc("/api/v1/webhook",checkGithub)
 	handler := cors.AllowAll().Handler(router)
 	// port := fmt.Sprintf(":%s", viper.Get("host.port"))
 	port:=configuration.Server.Port
 	log.Printf("Server Running on port %d", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d",port), handler))
+}
+
+func checkGithub(w http.ResponseWriter, r *http.Request){
+	utils.WrapAPISuccess(w,r,"success",http.StatusOK)
+	return
 }
 
 func (idb *InDB) checkHealth(w http.ResponseWriter, r *http.Request) {
