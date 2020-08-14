@@ -20,10 +20,15 @@ const uploadPath = "./tmp"
 func main() {
 	var configuration config.Configuration
 
-	viper.SetConfigFile("./configs/config.yml")
-	if err := viper.ReadInConfig(); err != nil {
-		log.Fatalf("Error reading config file, %s", err)
+	prefixList := []string{"../", "./"}
+
+	for _, prefix := range prefixList {
+		viper.SetConfigFile(prefix + "configs/config.yml")
+		if err := viper.ReadInConfig(); err == nil {
+			break
+		}
 	}
+
 	err := viper.Unmarshal(&configuration)
 	if err != nil {
 		log.Fatalf("unable to decode into struct, %v", err)
