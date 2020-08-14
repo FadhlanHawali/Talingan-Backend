@@ -31,7 +31,17 @@ jobs:
         fi
 
     - name: Build
-      run: go build -v .
+      run: go build -v -o cmd/talingan-backend.
 
     - name: Test
       run: go test -v .
+
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        source: "cmd/talingan-backend"
+        target: ${{ secrets.GOBIN }}
