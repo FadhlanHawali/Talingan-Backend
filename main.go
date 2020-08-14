@@ -66,7 +66,7 @@ func (idb *InDB) checkHealth(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
-
 type InDB struct{
 	DB *mongo.Client
 }
+
