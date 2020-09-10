@@ -17,7 +17,7 @@ func initRouter(router *mux.Router, svc *service.Services){
 	handler := cors.AllowAll().Handler(router)
 
 	//fmt.Println("Apps served on :" + args.Port)
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":8080"), handler))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":8008"), handler))
 }
 
 func Start (app *services.ServicesRest){
