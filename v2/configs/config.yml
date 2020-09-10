@@ -1,5 +1,5 @@
 database:
-  connectionUri: "mongodb://127.0.0.1:27017"
+  connectionUri: "talingan:RahasiaTalinganku2020%@/talingan?charset=utf8&parseTime=True&loc=Local"
 
 server:
   port: 8080

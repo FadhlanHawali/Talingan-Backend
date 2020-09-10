@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"github.com/Talingan-Backend/v2/internal/helper"
 )
 
 const maxUploadSize = 2 * 1024 * 1024 // 2 mb
@@ -16,7 +17,7 @@ const uploadPath = "./tmp"
 
 func UploadFileHandler(w http.ResponseWriter, r *http.Request)  {
 	if r.Method != "POST" {
-		utils.WrapAPIError(w,r,"Bad request method", http.StatusBadRequest)
+		helper.WrapAPIError(w,r,"Bad request method", http.StatusBadRequest)
 		return
 	}
 	if err := r.ParseMultipartForm(maxUploadSize); err != nil {

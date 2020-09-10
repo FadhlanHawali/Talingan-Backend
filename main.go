@@ -3,10 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
-	config "github.com/Talingan-Backend/configs"
 	"github.com/Talingan-Backend/database"
 	"github.com/Talingan-Backend/pkg/file"
 	"github.com/Talingan-Backend/utils"
+	config "github.com/Talingan-Backend/v2/configs"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 	"github.com/spf13/viper"
