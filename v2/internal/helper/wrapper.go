@@ -1,4 +1,4 @@
-package utils
+package helper
 
 import (
 	"encoding/json"
@@ -11,12 +11,11 @@ func WrapAPIError(w http.ResponseWriter, r *http.Request, message string, code i
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
 	result, err := json.Marshal(map[string]interface{}{
-		"Code":         code,
-		"ErrorType":    http.StatusText(code),
-		"ErrorDetails": message,
+		"code":         code,
+		"error_type":    http.StatusText(code),
+		"error_details": message,
 	})
 	if err == nil {
-		log.Println(message)
 		w.Write(result)
 	} else {
 		log.Println(fmt.Sprintf("can't wrap API error : %s", err))
@@ -27,8 +26,8 @@ func WrapAPISuccess(w http.ResponseWriter, r *http.Request, message string, code
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
 	result, err := json.Marshal(map[string]interface{}{
-		"Code":   code,
-		"Status": message,
+		"code":   code,
+		"status": message,
 	})
 	if err == nil {
 		log.Println(message)
@@ -42,9 +41,9 @@ func WrapAPIData(w http.ResponseWriter, r *http.Request, data interface{}, code 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
 	result, err := json.Marshal(map[string]interface{}{
-		"Code":   code,
-		"Status": message,
-		"Data":   data,
+		"code":   code,
+		"status": message,
+		"data":   data,
 	})
 	if err == nil {
 		log.Println(message)
@@ -53,3 +52,4 @@ func WrapAPIData(w http.ResponseWriter, r *http.Request, data interface{}, code 
 		log.Println(fmt.Sprintf("can't wrap API data : %s", err))
 	}
 }
+
