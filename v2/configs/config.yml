@@ -1,5 +1,5 @@
 database:
-  connectionUri: "talingan:RahasiaTalinganku2020%@/talingan?charset=utf8&parseTime=True&loc=Local"
+  connectionUri: "{user}:{password}@/talingan?charset=utf8&parseTime=True&loc=Local"
 
 server:
   port: 8080

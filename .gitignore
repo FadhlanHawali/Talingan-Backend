@@ -2,3 +2,5 @@ Talingan-Backend
 .idea/
 v2/bin/talingan-backend
 /v2/bin/talingan-backend
+tmp/
+/tmp/

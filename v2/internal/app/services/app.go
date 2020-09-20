@@ -4,6 +4,7 @@ import (
 	_ "fmt"
 	config "github.com/Talingan-Backend/v2/configs"
 	"github.com/Talingan-Backend/v2/constant"
+	"github.com/Talingan-Backend/v2/internal/entity"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
@@ -36,8 +37,7 @@ func NewServicesRest() (*ServicesRest, error){
 	if err != nil {
 		return nil, errors.Wrapf(err, "error connect db")
 	}
-
-
+	migrateDB(db)
 
 	app := new(ServicesRest)
 
@@ -97,4 +97,14 @@ func initDB(cfg config.Configuration) (*gorm.DB, error) {
 	}
 
 	return db, nil
+}
+
+func migrateDB(db *gorm.DB) {
+
+	db.AutoMigrate(
+		&entity.Kandang{},
+		&entity.DeteksiKandang{},
+		&entity.HasilDeteksi{},
+	)
+
 }
