@@ -9,8 +9,8 @@ staticfile:
   maxUploadSize: 4096
 
 gcloud:
-  projectID: "ecommercechatbotdev-wcscos"
-  location: "us-central1"
-  modelID: "ICN7880492306363580416"
+  projectID: "{GCLOUD_PROJECT_ID}"
+  location: "{GCLOUD_LOCATION}"
+  modelID: "{MODEL_ID}"
   filePath: ""
 
