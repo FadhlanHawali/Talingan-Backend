@@ -1,3 +1,6 @@
 Talingan-Backend
-./configs/config.yml
 .idea/
+v2/bin/talingan-backend
+/v2/bin/talingan-backend
+tmp/
+/tmp/

@@ -3,10 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
-	config "github.com/Talingan-Backend/configs"
 	"github.com/Talingan-Backend/database"
 	"github.com/Talingan-Backend/pkg/file"
 	"github.com/Talingan-Backend/utils"
+	config "github.com/Talingan-Backend/v2/configs"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 	"github.com/spf13/viper"
@@ -20,10 +20,15 @@ const uploadPath = "./tmp"
 func main() {
 	var configuration config.Configuration
 
-	viper.SetConfigFile("./configs/config.yml")
-	if err := viper.ReadInConfig(); err != nil {
-		log.Fatalf("Error reading config file, %s", err)
+	prefixList := []string{"../", "./"}
+
+	for _, prefix := range prefixList {
+		viper.SetConfigFile(prefix + "configs/config.yml")
+		if err := viper.ReadInConfig(); err == nil {
+			break
+		}
 	}
+
 	err := viper.Unmarshal(&configuration)
 	if err != nil {
 		log.Fatalf("unable to decode into struct, %v", err)
@@ -44,7 +49,9 @@ func main() {
 	// port := fmt.Sprintf(":%s", viper.Get("host.port"))
 	port:=configuration.Server.Port
 	log.Printf("Server Running on port %d", port)
+	log.Println("checks122")
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d",port), handler))
+
 }
 
 func checkGithub(w http.ResponseWriter, r *http.Request){
@@ -64,7 +71,7 @@ func (idb *InDB) checkHealth(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
-
 type InDB struct{
 	DB *mongo.Client
 }
+

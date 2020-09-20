@@ -1,0 +1,16 @@
+database:
+  connectionUri: "{user}:{password}@/talingan?charset=utf8&parseTime=True&loc=Local"
+
+server:
+  port: 8080
+
+staticfile:
+  dir: "/mnt"
+  maxUploadSize: 4096
+
+gcloud:
+  projectID: "{GCLOUD_PROJECT_ID}"
+  location: "{GCLOUD_LOCATION}"
+  modelID: "{MODEL_ID}"
+  filePath: ""
+
